@@ -3,6 +3,8 @@ package ServletPracticeProblem;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String user = request.getParameter("user");
+		String namePattern = "^[A-Z]{1}[a-z]{3,}$";
+		Pattern pat = Pattern.compile(namePattern);
+		Matcher match = pat.matcher(user);
 		String pwd = request.getParameter("pwd");
 		String userId = getServletConfig().getInitParameter("user");
 		String password = getServletConfig().getInitParameter("password");
